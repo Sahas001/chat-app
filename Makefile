@@ -1,7 +1,7 @@
 build:
-	go build -o chat
+	cd chat && go build -o chat
 
 run:
-	./chat
+	cd chat && ./chat
 
 .PHONY: build run
