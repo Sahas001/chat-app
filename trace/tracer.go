@@ -7,7 +7,6 @@ import (
 
 type Tracer interface {
 	Trace(...interface{})
-	GetWriter() io.Writer
 }
 
 type tracer struct {
@@ -23,6 +22,10 @@ func New(w io.Writer) Tracer {
 	return &tracer{out: w}
 }
 
-func (t *tracer) GetWriter() io.Writer {
-	return t.out
+type nilTracer struct{}
+
+func (t *nilTracer) Trace(a ...interface{}) {}
+
+func Off() Tracer {
+	return &nilTracer{}
 }
